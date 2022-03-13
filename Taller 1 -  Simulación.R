@@ -114,6 +114,48 @@ mediaMachos=mean(machos);mediaMachos
   #c. Más de 10 sean falsos.
 
 
+# X = numero de billetes falsos
+n = 900
+p = 0.015
+q = 1-p
+
+
+# 2° PUNTO, ITEM A --------------------------------------------------------
+
+# P(X1<=25)
+
+x1 = 25
+prob1 = pbinom(x1, n, p, lower.tail = T);prob1
+
+#La probabilidad de que a lo sumo 25 billetes sean falsos es de 0.9985
+
+
+# 2° PUNTO, ITEM B --------------------------------------------------------
+
+# P(X>=20) y P(X<=30)
+
+x2 = 20
+x3 = 30
+
+prob2 = pbinom(x2, n, p, lower.tail = F)
+prob3 = pbinom(x3, n, p, lower.tail = F)
+
+probTotal2 = prob2-prob3;
+
+#La probabilidad de que 20 a 30 de billetes sean falsos  es de 0.0339
+
+
+# 2° PUNTO, ITEM C --------------------------------------------------------
+
+# P(X>10)
+
+x4 = 10
+
+probTotal3 = 1 - pbinom(x4, n, p);probTotal
+
+
+
+
 # 3° PUNTO ----------------------------------------------------------------
 
 #Según un estudio del Departamento Nacional de Estadística -DANE-, la vida 
