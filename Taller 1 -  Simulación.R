@@ -30,7 +30,8 @@ machos<-c(140.9,173.9,118.9,121.7,177.4,140.0,173.8,154.8,192.7,
           154.5,177.5,134.4,109.2,153.4,175.0,150.7,138.7,169.8,
           203.3,136.7,153.9,163.0,165.3,176.7,137.7,126.7,150.0);machos
 
-
+nHembras = length(hembras)
+nMachos = length(machos)
 
 # 1° PUNTO, ITEM A --------------------------------------------------------
 
@@ -96,8 +97,44 @@ mediaMachos=mean(machos);mediaMachos
 
 # 1° PUNTO, ITEM C --------------------------------------------------------
 
+#Confianza asignada
+confianza = 0.97
 
+#Se buscan sus dos colas, dejando un 5% en la parte inferior y superior.
+z = qnorm(0.5+confianza/2)
+
+#intervalo de confianza HEMBRAS
+idcH = c(mediaHembras-z*desviacionHembras/nHembras^.5, 
+        mediaHembras+z*desviacionHembras/nHembras^.5);idcH
+
+#El intervalo de confianza para las HEMBRAS VA DESDE 184.6608 A 193.1725
+#dandonos a entender que cualquier longitud fuera de estos margenes es poco 
+#probable que suceda ya que hay un 97% de confianza que el dato este entre los
+#valores
+
+
+#intervalo de confianza MACHOS
+idcM = c(mediaMachos-z*desviacionMachos/nMachos^.5, 
+         mediaMachos+z*desviacionMachos/nMachos^.5);idcM
+
+#El intervalo de confianza para las MACHOS VA DESDE 144.8341 A 164.0992
+#dandonos a entender que cualquier longitud fuera de estos margenes es poco 
+#probable que suceda ya que hay un 97% de confianza que el dato este entre los
+#valores
+  
 # 1° PUNTO, ITEM D ------------------------------------------------------
+par(mfrow=c(1,2))
+
+#BOXPLOT MACHOS
+boxplot(machos, horizontal = FALSE,   
+        main = "LANGOSTINOS MACHOS", ylab = "longitud")
+stripchart(machos, vertical = TRUE, method = "jitter", pch = 19, add = TRUE, col = "BLACK")
+
+#BOXPLOT HEMBRAS
+boxplot(hembras, horizontal = FALSE,   
+        main = "LANGOSTINOS HEMBRAS", ylab = "longitud")
+stripchart(hembras, vertical = TRUE, method = "jitter", pch = 19, add = TRUE, col = "BLACK")
+
 
 
 # 1° PUNTO, ITEM E --------------------------------------------------------
@@ -151,9 +188,9 @@ probTotal2 = prob2-prob3;
 
 x4 = 10
 
-probTotal3 = 1 - pbinom(x4, n, p);probTotal
+probTotal3 = 1 - pbinom(x4, n, p);probTotal3
 
-
+#La probabilidad de que hayan más de 10 billetes sean falsos es de 0.7907
 
 
 # 3° PUNTO ----------------------------------------------------------------

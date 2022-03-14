@@ -1,0 +1,240 @@
+---
+title: "Taller 1 - Simulación"
+author: "Diego Riveros - Jhonatan Romero"
+date: '2022-03-16'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 
+### **EJERCICIO 1°**
+
+Al comparar los caracteres morfométricos de una especie de langostinos de gran importancia económica en Argentina se observaron diferencias de tamaño entre macho y hembra. En la siguiente tabla se presentan los datos (Largo total mm) de las morfometrías de machos y hembras obtenidos en diferentes recolectas (Ruiz & Mendia, 2008).
+
+
+|HEMBRAS|[]()
+:-------------: | :----:| :----:| :----:| :-----:| :----:| :----:|
+|183.2|182.5|166.8|184.1|190.0|196.3|183.0|178.1|193.3|204.3|193.2|187.3|
+ 176.5|180.4|185.8|179.0|184.3|189.3|188.3|189.2|195.5|186.8|189.1|202.4|
+ 202.2|203.1|210.8|
+ 
+|MACHOS|[]()
+:-------------: | :----:| :----:| :----:| :-----:| :----:| :----:|
+|140.9|173.9|118.9|121.7|177.4|140.0|173.8|154.8|192.7|154.5|177.5|134.4|
+ 109.2|153.4|175.0|150.7|138.7|169.8|203.3|136.7|153.9|163.0|165.3|176.7|
+ 137.7|126.7|150.0|
+
+```{r punto1, echo = FALSE}
+library(moments)
+
+hembras<-c(183.2,182.5,166.8,184.1,190.0,196.3,183.0,178.1,193.3,
+           204.3,193.2,187.3,176.5,180.4,185.8,179.0,184.3,189.3,
+           188.3,189.2,195.5,186.8,189.1,202.4,202.2,203.1,210.8); 
+
+#Datos de langostinos machos
+machos<-c(140.9,173.9,118.9,121.7,177.4,140.0,173.8,154.8,192.7, 
+          154.5,177.5,134.4,109.2,153.4,175.0,150.7,138.7,169.8,
+          203.3,136.7,153.9,163.0,165.3,176.7,137.7,126.7,150.0);
+
+
+nHembras = length(hembras)
+nMachos = length(machos)
+
+mediaHembras=mean(hembras);
+desviacionHembras<-sd(hembras);
+
+desviacionMachos<-sd(machos);
+mediaMachos=mean(machos);
+
+skeM = skewness(machos)
+KurM = kurtosis(machos)
+skeH = skewness(hembras)
+KurH = kurtosis(hembras)
+
+confianza = 0.97
+z = qnorm(0.5+confianza/2)
+
+idcH = c(mediaHembras-z*desviacionHembras/nHembras^.5, 
+        mediaHembras+z*desviacionHembras/nHembras^.5);
+idcM = c(mediaMachos-z*desviacionMachos/nMachos^.5, 
+         mediaMachos+z*desviacionMachos/nMachos^.5);
+
+```
+
+ **A.** Haga un histograma con cinco clases y determine la distribución de los datos para cada sexo. Explique acerca de la distribución del tamaño para cada género. 
+
+
+```{r punto1Histo, echo = FALSE}
+
+par(mfrow=c(1,2))
+
+#Histograma de 5 clases para macho y hembra
+hist(hembras,breaks = 5,main="Hembras")
+hist(machos,breaks = 5,main="Machos")
+
+
+```
+
+El problema nos presenta una distribucion normal tanto para hembras, como machos debido a las caracteristicas de sus datos ya que son continuos y Mediante el coeficiente de simetria para los  datos de ambos sexos nos arrojan la sigueinte información de su comportamiento.
+
+
+```{r punto1A1, echo = FALSE}
+
+paste ("variable de asimetria", skeH)
+paste ("El coeficiente de curtosis: ", KurH)
+
+```
+
+
+###### **Para las hembras, nos da un valor de 0.2056 en la variable de asimetria, lo que indica que tiene una simetria positiva y con el coeficiente Courtisis que nos da 2.9457, nos muestra una distribución leptocurtica.**
+
+
+
+```{r punto1A2, echo = FALSE}
+
+paste ("variable de asimetria", skeM)
+paste ("El coeficiente de curtosis: ", KurM)
+
+```
+
+
+###### **Para las hembras, nos da un valor de 0.0447 en la variable de asimetria, lo que indica que tiene una simetria positiva y con el coeficiente Courtisis que nos da 2.4257, nos muestra una distribución leptocurtica.**
+ 
+
+
+
+ **B.** Hallar el promedio y la desviación estándar para cada sexo. ¿Qué puede concluir?
+ 
+ ```{r punto1B1, echo = FALSE}
+
+paste ("Promedio HEMBRAS: ", mediaHembras)
+paste ("Desviación estandat HEMBRAS: ", desviacionHembras)
+
+```
+###### **Estos datos estadisticos nos indican que el tamaño promedio de los langostinos hembras es de 189.066 y su desviación estandar de 9.9831 nos muestra la dispersion de los datos con respecto a su media, en este caso, nos da a conocer que los datos no se encuentran tan dispersos entre sí.**
+
+ 
+ ```{r punto1B2, echo = FALSE}
+
+paste ("Promedio HEMBRAS: ", mediaMachos)
+paste ("Desviación estandat HEMBRAS: ", desviacionMachos)
+
+```
+###### **Estos datos estadisticos nos indican que el tamaño promedio de los langostinos machos es de 154.4667 y su desviación estandar de 23.0642 nos muestra la dispersion de los datos con respecto a su media, en este caso, nos da a conocer que los datos se encuentran un poco dispersos entre sí.**
+
+
+
+
+ **C.** Halle un intervalo para la media del Largo total por sexo con un nivel de confianza del 97%. Provea la inter-pretación respectiva. 
+ 
+  ```{r punto1C1, echo = FALSE}
+
+paste ("Limite inferior para el intervalo de confianza de las HEMBRAS: ", idcH[1])
+paste ("Limite superior para el intervalo de confianza de las HEMBRAS: ", idcH[2])
+
+```
+###### **El intervalo de confianza para las HEMBRAS VA DESDE 184.6608 A 193.1725 dandonos a entender que cualquier longitud fuera de estos margenes es poco probable que suceda ya que hay un 97% de confianza que el dato este entre los valores**
+
+  ```{r punto1C2, echo = FALSE}
+
+paste ("Limite inferior para el intervalo de confianza de las MACHOS: ", idcM[1])
+paste ("Limite superior para el intervalo de confianza de las MACHOS: ", idcM[2])
+
+```
+###### **El intervalo de confianza para las MACHOS VA DESDE 144.8341 A 164.0992 dandonos a entender que cualquier longitud fuera de estos margenes es poco probable que suceda ya que hay un 97% de confianza que el dato este entre los valores**
+
+
+
+
+ **D.** Construya un Boxplot por sexo e interprételo.
+ 
+ 
+```{r puntoDBOXPLOT, echo = FALSE}
+
+par(mfrow=c(1,2))
+
+#Histograma de 5 clases para macho y hembra
+boxplot(machos, horizontal = FALSE,   
+        main = "LANGOSTINOS MACHOS", ylab = "longitud")
+stripchart(machos, vertical = TRUE, method = "jitter", pch = 19, add = TRUE, col = "BLACK")
+
+boxplot(hembras, horizontal = FALSE,   
+        main = "LANGOSTINOS HEMBRAS", ylab = "longitud")
+stripchart(hembras, vertical = TRUE, method = "jitter", pch = 19, add = TRUE, col = "BLACK")
+
+
+```
+
+
+
+
+
+ **E.** Compruebe a normalidad de los datos.
+ 
+ 
+### **EJERCICIO 2°**
+
+En un restaurante de la ciudad se sabe que la probabilidad de que se reciba un billete de $50.000 falso es de 0.015. Si se sabe que en una semana se reciben pagos con 900 billetes de $50.000, halle la probabilidad de que: 
+
+```{r punto2, echo = FALSE}
+n = 900
+p = 0.015
+q = 1-p
+x1 = 25
+prob1 = pbinom(x1, n, p, lower.tail = T)
+x2 = 20
+x3 = 30
+
+prob2 = pbinom(x2, n, p, lower.tail = F)
+prob3 = pbinom(x3, n, p, lower.tail = F)
+
+probTotal2 = prob2-prob3;
+
+x4 = 10
+
+probTotal3 = 1 - pbinom(x4, n, p);
+
+```
+**A.** A lo sumo 25 billetes sean falsos.
+
+
+```{r punto2A1, echo = FALSE}
+
+paste ("P(X1<=25)")
+paste ("La probabilidad de que a lo sumo 25 billetes sean falsos es de ", prob1)
+
+
+```
+
+
+
+
+ **B.** La cantidad de billetes falsos esté entre 20 y 30.
+```{r punto2B, echo = FALSE}
+
+paste ("P(X>=20) y P(X<=30)")
+paste ("La probabilidad de que 20 a 30 de billetes sean falsos es de ", probTotal2)
+
+
+```
+
+
+
+
+ **C.** Más de 10 sean falsos.
+```{r punto2C, echo = FALSE}
+
+paste ("P(X>10)")
+paste ("La probabilidad de que hayan más de 10 billetes sean falsos es de ", probTotal3)
+
+
+```
+
+
+
+### **EJERCICIO 3°**
+
+Según un estudio del Departamento Nacional de Estadística -DANE-, la vida media para el quinquenio de 2010 a 2015 de los habitantes de Colombia es 76 años, con una varianza de 25. Se pretende hacer un estudio con el objetivo de extrapolar los resultados anteriores a una pequeña ciudad de 100.000 habitantes, considerando que el tiempo de sobrevida es normal. 
