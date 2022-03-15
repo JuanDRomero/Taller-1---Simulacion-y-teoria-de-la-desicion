@@ -1,5 +1,5 @@
 ##Taller #1: Simulación y teoria de la decisíon
-#Presentado por: Jhonatan Romero y Diego Riveros
+#Presentado por: Juan David Romero y Diego Andres Riveros
 
 
 # 1° PUNTO ----------------------------------------------------------------
@@ -39,8 +39,11 @@ nMachos = length(machos)
 par(mfrow=c(1,2))
 
 #Histograma de 5 clases para macho y hembra
-hist(hembras,breaks = 5,main="Hembras")
-hist(machos,breaks = 5,main="Machos")
+#Histograma de 5 clases para macho y hembra
+hist(hembras,breaks = 5,main="Hembras",col="#F19C89",
+     col.main="#520707",col.sub="white",col.lab="#520707",fg="black", xlab = "longitud", , ylab = "Numero de langostinos")
+hist(machos,breaks = 5,main="Machos",col="#F19C89",
+     col.main="#520707",col.sub="white",col.lab="#520707",fg="black", xlab = "longitud", , ylab = "Numero de langostinos")
 
 
 #Con la libreria "moments", se saca la variable de asimetria y el coeficiente 
@@ -127,13 +130,13 @@ par(mfrow=c(1,2))
 
 #BOXPLOT MACHOS
 boxplot(machos, horizontal = FALSE,   
-        main = "LANGOSTINOS MACHOS", ylab = "longitud")
-stripchart(machos, vertical = TRUE, method = "jitter", pch = 19, add = TRUE, col = "BLACK")
+        main = "LANGOSTINOS MACHOS", ylab = "longitud", col="#F6A0A0")
+stripchart(machos, vertical = TRUE, method = "jitter", pch = 19, add = TRUE, col = "#F54B4B")
 
-#BOXPLOT HEMBRAS
+#BOXPLOT hembras
 boxplot(hembras, horizontal = FALSE,   
-        main = "LANGOSTINOS HEMBRAS", ylab = "longitud")
-stripchart(hembras, vertical = TRUE, method = "jitter", pch = 19, add = TRUE, col = "BLACK")
+        main = "LANGOSTINOS HEMBRAS", ylab = "longitud", col="#F6A0A0")
+stripchart(hembras, vertical = TRUE, method = "jitter", pch = 19, add = TRUE, col="#F54B4B")
 
 
 
@@ -156,6 +159,8 @@ n = 900
 p = 0.015
 q = 1-p
 
+plot(0:30, dbinom(0:30, n, p),main = "Distribucion Binomial",xlab = "Numero de billetes",ylab = "Probabilidad",pch=16,col="red",
+     col.main="blue",col.sub="white",col.lab="orange",fg="purple")
 
 # 2° PUNTO, ITEM A --------------------------------------------------------
 

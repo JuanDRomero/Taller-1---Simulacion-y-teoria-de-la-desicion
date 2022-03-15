@@ -1,6 +1,6 @@
 ---
 title: "Taller 1 - Simulación"
-author: "Diego Riveros - Juan David Romero"
+author: "Diego RivDiego Andreseros - Juan David Romero"
 date: '2022-03-16'
 output: html_document
 ---
@@ -72,8 +72,10 @@ idcM = c(mediaMachos-z*desviacionMachos/nMachos^.5,
 par(mfrow=c(1,2))
 
 #Histograma de 5 clases para macho y hembra
-hist(hembras,breaks = 5,main="Hembras")
-hist(machos,breaks = 5,main="Machos")
+hist(hembras,breaks = 5,main="Hembras",col="#F19C89",
+     col.main="#520707",col.sub="white",col.lab="#520707",fg="black", xlab = "longitud", , ylab = "Numero de langostinos")
+hist(machos,breaks = 5,main="Machos",col="#F19C89",
+     col.main="#520707",col.sub="white",col.lab="#520707",fg="black", xlab = "longitud", , ylab = "Numero de langostinos")
 
 
 ```
@@ -158,14 +160,14 @@ par(mfrow=c(1,2))
 
 #Histograma de 5 clases para macho y hembra
 boxplot(machos, horizontal = FALSE,   
-        main = "LANGOSTINOS MACHOS", ylab = "longitud")
-stripchart(machos, vertical = TRUE, method = "jitter", pch = 19, add = TRUE, col = "BLACK")
+        main = "LANGOSTINOS MACHOS", ylab = "longitud", col="#F6A0A0")
+stripchart(machos, vertical = TRUE, method = "jitter", pch = 19, add = TRUE, col = "#F54B4B")
 
 
 
 boxplot(hembras, horizontal = FALSE,   
-        main = "LANGOSTINOS HEMBRAS", ylab = "longitud")
-stripchart(hembras, vertical = TRUE, method = "jitter", pch = 19, add = TRUE, col = "BLACK")
+        main = "LANGOSTINOS HEMBRAS", ylab = "longitud", col="#F6A0A0")
+stripchart(hembras, vertical = TRUE, method = "jitter", pch = 19, add = TRUE, col="#F54B4B")
 
 
 ```
@@ -205,6 +207,17 @@ probTotal3 = 1 - pbinom(x4, n, p);
 ### **EJERCICIO 2°**
 
 En un restaurante de la ciudad se sabe que la probabilidad de que se reciba un billete de $50.000 falso es de 0.015. Si se sabe que en una semana se reciben pagos con 900 billetes de $50.000, halle la probabilidad de que: 
+
+```{r punto2Grafica, echo = FALSE}
+
+n = 900
+p = 0.015
+
+plot(0:30, dbinom(0:30, n, p),main = "Distribucion Binomial",xlab = "Numero de billetes",ylab = "Probabilidad",pch=16,col="red",
+     col.main="blue",col.sub="white",col.lab="orange",fg="purple")
+
+```
+
 
 ```{r punto2, echo = FALSE}
 n = 900
