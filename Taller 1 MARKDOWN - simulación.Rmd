@@ -161,6 +161,8 @@ boxplot(machos, horizontal = FALSE,
         main = "LANGOSTINOS MACHOS", ylab = "longitud")
 stripchart(machos, vertical = TRUE, method = "jitter", pch = 19, add = TRUE, col = "BLACK")
 
+
+
 boxplot(hembras, horizontal = FALSE,   
         main = "LANGOSTINOS HEMBRAS", ylab = "longitud")
 stripchart(hembras, vertical = TRUE, method = "jitter", pch = 19, add = TRUE, col = "BLACK")
@@ -169,10 +171,35 @@ stripchart(hembras, vertical = TRUE, method = "jitter", pch = 19, add = TRUE, co
 ```
 
 
+Como observamos en el boxplot de los langostinos hembras, podemos analizar que los datos se encuentran juntos, encontrando algunos datos atipicos y observamos que tiene una simetria positiva ya que la caja superior es ligeramente mas grande que la inferior.
+
+Como observamos en el boxplot de los langostinos machos, podemos analizar que los datos se encuentran mas dispersos que el boxplot de las hembras, encontrando pocos datos atipicos y observamos que tiene una simetria positiva ya que la caja superior es mas grande que la inferior.
+
+
 
 
 
  **E.** Compruebe a normalidad de los datos.
+ ```{r punto1E, echo = FALSE}
+n = 900
+p = 0.015
+q = 1-p
+x1 = 25
+prob1 = pbinom(x1, n, p, lower.tail = T)
+x2 = 20
+x3 = 30
+
+prob2 = pbinom(x2, n, p, lower.tail = F)
+prob3 = pbinom(x3, n, p, lower.tail = F)
+
+probTotal2 = prob2-prob3;
+
+x4 = 10
+
+probTotal3 = 1 - pbinom(x4, n, p);
+
+```
+ 
  
  
 ### **EJERCICIO 2°**
