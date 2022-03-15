@@ -73,9 +73,12 @@ par(mfrow=c(1,2))
 
 #Histograma de 5 clases para macho y hembra
 hist(hembras,breaks = 5,main="Hembras",col="#F19C89",
-     col.main="#520707",col.sub="white",col.lab="#520707",fg="black", xlab = "longitud", , ylab = "Numero de langostinos")
+     col.main="#520707",col.sub="white",col.lab="#520707",fg="black", 
+     xlab = "longitud", ylab = "Numero de langostinos")
+
 hist(machos,breaks = 5,main="Machos",col="#F19C89",
-     col.main="#520707",col.sub="white",col.lab="#520707",fg="black", xlab = "longitud", , ylab = "Numero de langostinos")
+     col.main="#520707",col.sub="white",col.lab="#520707",fg="black",
+     xlab = "longitud" , ylab = "Numero de langostinos")
 
 
 ```
@@ -183,26 +186,23 @@ Como observamos en el boxplot de los langostinos machos, podemos analizar que lo
 
  **E.** Compruebe a normalidad de los datos.
  ```{r punto1E, echo = FALSE}
-n = 900
-p = 0.015
-q = 1-p
-x1 = 25
-prob1 = pbinom(x1, n, p, lower.tail = T)
-x2 = 20
-x3 = 30
+par(mfrow=c(1,2)) #Agregamos 2 rejillas
+#Hembras
+qqnorm(hembras,main="Langostinos Hembras",ylab="") 
+qqline(hembras)
 
-prob2 = pbinom(x2, n, p, lower.tail = F)
-prob3 = pbinom(x3, n, p, lower.tail = F)
+#Machos
+qqnorm(machos,main="Langostinos Machos",ylab="") 
+qqline(machos)
 
-probTotal2 = prob2-prob3;
-
-x4 = 10
-
-probTotal3 = 1 - pbinom(x4, n, p);
 
 ```
- 
- 
+
+
+
+
+Como vemos graficamente en las graficas tanto los langostinos macho y los langostinos hembra, los datos forman una linea aproximadamente recta a lo largo de la linea. La distibucion normal parece ajustarse con los datos de los langostinos, por ende podemos decir que las graficas parecen obedecer a un grafico de distribucion normal.
+  
  
 ### **EJERCICIO 2°**
 
