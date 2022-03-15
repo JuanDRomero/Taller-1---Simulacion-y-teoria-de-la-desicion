@@ -1,6 +1,6 @@
 ---
 title: "Taller 1 - Simulación"
-author: "Diego Riveros - Jhonatan Romero"
+author: "Diego Riveros - Juan David Romero"
 date: '2022-03-16'
 output: html_document
 ---
@@ -238,3 +238,48 @@ paste ("La probabilidad de que hayan más de 10 billetes sean falsos es de ", pr
 ### **EJERCICIO 3°**
 
 Según un estudio del Departamento Nacional de Estadística -DANE-, la vida media para el quinquenio de 2010 a 2015 de los habitantes de Colombia es 76 años, con una varianza de 25. Se pretende hacer un estudio con el objetivo de extrapolar los resultados anteriores a una pequeña ciudad de 100.000 habitantes, considerando que el tiempo de sobrevida es normal. 
+
+
+```{r punto3, echo = FALSE}
+
+#X= probabilidad de que un habitante sobreviva
+media=76
+varianza=25
+n=100000
+
+
+mayor92anios=ppois(91,76,lower.tail = F)
+
+plot(0:184,dpois(0:184,76),xlab="Tiempo de sobrevida de los habitantes", ylab="Probabilidad",
+     main=" Distribucion Poisson",pch=16,col="red",
+     col.main="blue",col.sub="white",col.lab="orange",fg="purple")
+
+
+menos55anios<-ppois(55,76);menos55anios#Viviran menos de 55 años
+mas75anios<-ppois(74,76,lower.tail = F);mas75anios
+
+totalB=menos55anios+mas75anios#Viviran menos de 55 o mas de 75 anios
+
+
+```
+
+ **A.**  ¿Cuántos de los habitantes de la pequeña ciudad superarán previsiblemente los 92 años?
+
+```{r punto3A, echo = FALSE}
+
+#X= probabilidad de que un habitante sobreviva
+paste("La cantidad de habitantes que superaran los 92 años es: ",mayor92anios*100000)
+
+
+```
+
+ **B.**  ¿Cuántos vivirán menos de 55 años o más de 75 años?
+
+```{r punto3B, echo = FALSE}
+
+#X= probabilidad de que un habitante sobreviva
+paste("La cantidad de habitantes que viviran menos de 55 años o mas de 75 años es de : ",totalB*100000)
+
+
+```
+ 
